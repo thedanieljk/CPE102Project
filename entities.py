@@ -11,7 +11,7 @@ class Background:
       return self.position
    def get_images(self):
       return self.imgs
-
+   
 class MinerNotFull:
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
@@ -36,6 +36,8 @@ class MinerNotFull:
       self.resource_count = n
    def get_resource_count(self):
       return self.resource_count
+   def get_resource_limit(self):
+      return self.resource_limit
 class MinerFull:
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
@@ -60,6 +62,8 @@ class MinerFull:
       self.resource_count = n
    def get_resource_count(self):
       return self.resource_count
+   def get_resource_limit(self):
+      return self.resource_limit
 class Vein:
    def __init__(self, name, rate, position, imgs, resource_distance=1):
       self.name = name
@@ -81,6 +85,8 @@ class Vein:
       self.resource_count = n
    def get_resource_count(self):
       return self.resource_count
+   def get_resource_limit(self):
+      return self.resource_limit
 class Ore:
    def __init__(self, name, position, imgs, rate=5000):
       self.name = name
@@ -101,6 +107,8 @@ class Ore:
       self.resource_count = n
    def get_resource_count(self):
       return self.resource_count
+   def get_resource_limit(self):
+      return self.resource_limit
 class Blacksmith:
    def __init__(self, name, position, imgs, resource_limit, rate,
       resource_distance=1):
@@ -125,6 +133,8 @@ class Blacksmith:
       self.resource_count = n
    def get_resource_count(self):
       return self.resource_count
+   def get_resource_limit(self):
+      return self.resource_limit
 class Obstacle:
    def __init__(self, name, position, imgs):
       self.name = name
@@ -143,6 +153,8 @@ class Obstacle:
       self.resource_count = n
    def get_resource_count(self):
       return self.resource_count
+   def get_resource_limit(self):
+      return self.resource_limit
 class OreBlob:
    def __init__(self, name, position, rate, imgs, animation_rate):
       self.name = name
@@ -164,6 +176,8 @@ class OreBlob:
       self.resource_count = n
    def get_resource_count(self):
       return self.resource_count
+   def get_resource_limit(self):
+      return self.resource_limit
 class Quake:
    def __init__(self, name, position, imgs, animation_rate):
       self.name = name
@@ -182,14 +196,13 @@ class Quake:
       return self.rate
    def set_resource_count(self, n):
       self.resource_count = n
-
+   def get_resource_limit(self):
+      return self.resource_limit
 
 
 def get_image(entity):
    return entity.imgs[entity.current_img]
 
-def get_resource_limit(entity):
-   return entity.resource_limit
 
 
 def get_resource_distance(entity):
