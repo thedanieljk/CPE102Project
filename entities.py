@@ -47,6 +47,17 @@ class MinerNotFull:
    def remove_pending_action(self, action):
       if hasattr(self, "pending_actions"):
          self.pending_actions.remove(action)
+   def add_pending_action(self, action):
+      if hasattr(self, "pending_actions"):
+         self.pending_actions.append(action) 
+   def get_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          return self.pending_actions
+      else:
+          return [] 
+   def clear_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions = []
 class MinerFull:
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
@@ -82,6 +93,17 @@ class MinerFull:
    def remove_pending_action(self, action):
       if hasattr(self, "pending_actions"):
           self.pending_actions.remove(action)
+   def add_pending_action(self, action):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions.append(action) 
+   def get_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          return self.pending_actions
+      else:
+          return [] 
+   def clear_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions = []
 class Vein:
    def __init__(self, name, rate, position, imgs, resource_distance=1):
       self.name = name
@@ -114,6 +136,17 @@ class Vein:
    def remove_pending_action(self, action):
        if hasattr(self, "pending_actions"):
           self.pending_actions.remove(action)
+   def add_pending_action(self, action):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions.append(action) 
+   def get_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          return self.pending_actions
+      else:
+          return [] 
+   def clear_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions = []
 class Ore:
    def __init__(self, name, position, imgs, rate=5000):
       self.name = name
@@ -143,8 +176,19 @@ class Ore:
    def get_animation_rate(self):
       return self.animation_rate
    def remove_pending_action(self, action):
-       if hasattr(self, "pending_actions"):
+      if hasattr(self, "pending_actions"):
           self.pending_actions.remove(action)
+   def add_pending_action(self, action):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions.append(action) 
+   def get_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          return self.pending_actions
+      else:
+          return [] 
+   def clear_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions = []
 class Blacksmith:
    def __init__(self, name, position, imgs, resource_limit, rate,
       resource_distance=1):
@@ -180,6 +224,17 @@ class Blacksmith:
    def remove_pending_action(self, action):
        if hasattr(self, "pending_actions"):
           self.pending_actions.remove(action)
+   def add_pending_action(self, action):
+       if hasattr(self, "pending_actions"):
+          self.pending_actions.append(action) 
+   def get_pending_actions(self):
+       if hasattr(self, "pending_actions"):
+          return self.pending_actions
+       else:
+          return [] 
+   def clear_pending_actions(self):
+       if hasattr(self, "pending_actions"):
+          self.pending_actions = []
 class Obstacle:
    def __init__(self, name, position, imgs):
       self.name = name
@@ -207,8 +262,19 @@ class Obstacle:
    def get_animation_rate(self):
       return self.animation_rate
    def remove_pending_action(self, action):
-    if hasattr(self, "pending_actions"):
-       self.pending_actions.remove(action)
+      if hasattr(self, "pending_actions"):
+          self.pending_actions.remove(action)
+   def add_pending_action(self, action):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions.append(action) 
+   def get_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          return self.pending_actions
+      else:
+          return [] 
+   def clear_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions = []
 class OreBlob:
    def __init__(self, name, position, rate, imgs, animation_rate):
       self.name = name
@@ -241,6 +307,17 @@ class OreBlob:
    def remove_pending_action(self, action):
        if hasattr(self, "pending_actions"):
           self.pending_actions.remove(action)
+   def add_pending_action(self, action):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions.append(action) 
+   def get_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          return self.pending_actions
+      else:
+          return [] 
+   def clear_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions = []
 class Quake:
    def __init__(self, name, position, imgs, animation_rate):
       self.name = name
@@ -268,27 +345,21 @@ class Quake:
    def get_animation_rate(self):
       return self.animation_rate
    def remove_pending_action(self, action):
-       if hasattr(self, "pending_actions"):
+      if hasattr(self, "pending_actions"):
           self.pending_actions.remove(action)
-
+   def add_pending_action(self, action):
+      if hasattr(self, "pending_actions"):
+         self.pending_actions.append(action) 
+   def get_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+         return self.pending_actions
+      else:
+         return [] 
+   def clear_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+         self.pending_actions = []
 def get_image(entity):
    return entity.imgs[entity.current_img]
-
-
-def add_pending_action(entity, action):
-   if hasattr(entity, "pending_actions"):
-      entity.pending_actions.append(action)
-
-
-def get_pending_actions(entity):
-   if hasattr(entity, "pending_actions"):
-      return entity.pending_actions
-   else:
-      return []
-
-def clear_pending_actions(entity):
-   if hasattr(entity, "pending_actions"):
-      entity.pending_actions = []
 
 
 def next_image(entity):

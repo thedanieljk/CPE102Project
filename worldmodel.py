@@ -13,7 +13,17 @@ class WorldModel:
       self.occupancy = occ_grid.Grid(num_cols, num_rows, None)
       self.entities = []
       self.action_queue = ordered_list.OrderedList()
-
+   def add_pending_action(self, action):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions.append(action) 
+   def get_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          return self.pending_actions
+      else:
+          return [] 
+   def clear_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions = []
 
 def within_bounds(world, pt):
    return (pt.x >= 0 and pt.x < world.num_cols and
@@ -54,7 +64,7 @@ def add_entity(world, entity):
    if within_bounds(world, pt):
       old_entity = occ_grid.get_cell(world.occupancy, pt)
       if old_entity != None:
-         entities.clear_pending_actions(old_entity)
+         old_entity.clear_pending_actions()
       occ_grid.set_cell(world.occupancy, pt, entity)
       world.entities.append(entity)
 

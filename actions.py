@@ -237,7 +237,7 @@ def try_transform_miner_not_full(world, entity):
 def try_transform_miner(world, entity, transform):
    new_entity = transform(world, entity)
    if entity != new_entity:
-      clear_pending_actions(world, entity)
+      world.clear_pending_actions()
       worldmodel.remove_entity_at(world, entity.get_position())
       worldmodel.add_entity(world, new_entity)
       schedule_animation(world, new_entity)
@@ -292,9 +292,9 @@ def create_ore_transform_action(world, entity, i_store):
 
 
 def remove_entity(world, entity):
-   for action in entities.get_pending_actions(entity):
+   for action in entity.get_pending_actions():
       worldmodel.unschedule_action(world, action)
-   entities.clear_pending_actions(entity)
+   entity.clear_pending_actions()
    worldmodel.remove_entity(world, entity)
 
 
@@ -359,7 +359,7 @@ def schedule_vein(world, vein, ticks, i_store):
 
 
 def schedule_action(world, entity, action, time):
-   entities.add_pending_action(entity, action)
+   entity.add_pending_action(action)
    worldmodel.schedule_action(world, action, time)
 
 
@@ -370,6 +370,6 @@ def schedule_animation(world, entity, repeat_count=0):
 
 
 def clear_pending_actions(world, entity):
-   for action in entities.get_pending_actions(entity):
+   for action in entity.get_pending_actions():
       worldmodel.unschedule_action(world, action)
-   entities.clear_pending_actions(entity)
+   entity.clear_pending_actions()
