@@ -44,6 +44,9 @@ class MinerNotFull:
       return self.name
    def get_animation_rate(self):
       return self.animation_rate
+   def remove_pending_action(self, action):
+      if hasattr(self, "pending_actions"):
+         self.pending_actions.remove(action)
 class MinerFull:
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
@@ -76,6 +79,9 @@ class MinerFull:
       return self.name
    def get_animation_rate(self):
       return self.animation_rate
+   def remove_pending_action(self, action):
+      if hasattr(self, "pending_actions"):
+          self.pending_actions.remove(action)
 class Vein:
    def __init__(self, name, rate, position, imgs, resource_distance=1):
       self.name = name
@@ -105,6 +111,9 @@ class Vein:
       return self.name
    def get_animation_rate(self):
       return self.animation_rate
+   def remove_pending_action(self, action):
+       if hasattr(self, "pending_actions"):
+          self.pending_actions.remove(action)
 class Ore:
    def __init__(self, name, position, imgs, rate=5000):
       self.name = name
@@ -133,6 +142,9 @@ class Ore:
       return self.name
    def get_animation_rate(self):
       return self.animation_rate
+   def remove_pending_action(self, action):
+       if hasattr(self, "pending_actions"):
+          self.pending_actions.remove(action)
 class Blacksmith:
    def __init__(self, name, position, imgs, resource_limit, rate,
       resource_distance=1):
@@ -165,6 +177,9 @@ class Blacksmith:
       return self.name
    def get_animation_rate(self):
       return self.animation_rate
+   def remove_pending_action(self, action):
+       if hasattr(self, "pending_actions"):
+          self.pending_actions.remove(action)
 class Obstacle:
    def __init__(self, name, position, imgs):
       self.name = name
@@ -191,6 +206,9 @@ class Obstacle:
       return self.name
    def get_animation_rate(self):
       return self.animation_rate
+   def remove_pending_action(self, action):
+    if hasattr(self, "pending_actions"):
+       self.pending_actions.remove(action)
 class OreBlob:
    def __init__(self, name, position, rate, imgs, animation_rate):
       self.name = name
@@ -220,6 +238,9 @@ class OreBlob:
       return self.name
    def get_animation_rate(self):
       return self.animation_rate
+   def remove_pending_action(self, action):
+       if hasattr(self, "pending_actions"):
+          self.pending_actions.remove(action)
 class Quake:
    def __init__(self, name, position, imgs, animation_rate):
       self.name = name
@@ -246,16 +267,13 @@ class Quake:
       return self.name
    def get_animation_rate(self):
       return self.animation_rate
-
+   def remove_pending_action(self, action):
+       if hasattr(self, "pending_actions"):
+          self.pending_actions.remove(action)
 
 def get_image(entity):
    return entity.imgs[entity.current_img]
 
-
-
-def remove_pending_action(entity, action):
-   if hasattr(entity, "pending_actions"):
-      entity.pending_actions.remove(action)
 
 def add_pending_action(entity, action):
    if hasattr(entity, "pending_actions"):
