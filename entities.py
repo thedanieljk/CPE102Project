@@ -42,6 +42,8 @@ class MinerNotFull:
       return self.resource_distance
    def get_name(self):
       return self.name
+   def get_animation_rate(self):
+      return self.animation_rate
 class MinerFull:
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
@@ -72,6 +74,8 @@ class MinerFull:
       return self.resource_distance
    def get_name(self):
       return self.name
+   def get_animation_rate(self):
+      return self.animation_rate
 class Vein:
    def __init__(self, name, rate, position, imgs, resource_distance=1):
       self.name = name
@@ -99,6 +103,8 @@ class Vein:
       return self.resource_distance
    def get_name(self):
       return self.name
+   def get_animation_rate(self):
+      return self.animation_rate
 class Ore:
    def __init__(self, name, position, imgs, rate=5000):
       self.name = name
@@ -125,6 +131,8 @@ class Ore:
       return self.resource_distance
    def get_name(self):
       return self.name
+   def get_animation_rate(self):
+      return self.animation_rate
 class Blacksmith:
    def __init__(self, name, position, imgs, resource_limit, rate,
       resource_distance=1):
@@ -155,6 +163,8 @@ class Blacksmith:
       return self.resource_distance
    def get_name(self):
       return self.name
+   def get_animation_rate(self):
+      return self.animation_rate
 class Obstacle:
    def __init__(self, name, position, imgs):
       self.name = name
@@ -179,6 +189,8 @@ class Obstacle:
       return self.resource_distance
    def get_name(self):
       return self.name
+   def get_animation_rate(self):
+      return self.animation_rate
 class OreBlob:
    def __init__(self, name, position, rate, imgs, animation_rate):
       self.name = name
@@ -206,6 +218,8 @@ class OreBlob:
       return self.resource_distance
    def get_name(self):
       return self.name
+   def get_animation_rate(self):
+      return self.animation_rate
 class Quake:
    def __init__(self, name, position, imgs, animation_rate):
       self.name = name
@@ -230,16 +244,13 @@ class Quake:
       return self.resource_distance
    def get_name(self):
       return self.name
-
+   def get_animation_rate(self):
+      return self.animation_rate
 
 
 def get_image(entity):
    return entity.imgs[entity.current_img]
 
-
-
-def get_animation_rate(entity):
-   return entity.animation_rate
 
 
 def remove_pending_action(entity, action):

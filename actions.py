@@ -218,7 +218,7 @@ def try_transform_miner_full(world, entity):
    new_entity = entities.MinerNotFull(
       entity.get_name(), entity.get_resource_limit(),
       entity.get_position(), entity.get_rate(),
-      entity.get_images(), entities.get_animation_rate(entity))
+      entity.get_images(), entity.get_animation_rate())
 
    return new_entity
 
@@ -230,7 +230,7 @@ def try_transform_miner_not_full(world, entity):
       new_entity = entities.MinerFull(
          entity.get_name(), entity.get_resource_limit(),
          entity.get_position(), entity.get_rate(),
-         entity.get_images(), entities.get_animation_rate(entity))
+         entity.get_images(), entity.get_animation_rate())
       return new_entity
 
 
@@ -261,7 +261,7 @@ def create_animation_action(world, entity, repeat_count):
       if repeat_count != 1:
          schedule_action(world, entity,
             create_animation_action(world, entity, max(repeat_count - 1, 0)),
-            current_ticks + entities.get_animation_rate(entity))
+            current_ticks + entity.get_animation_rate())
 
       return [entity.get_position()]
    return action
@@ -366,7 +366,7 @@ def schedule_action(world, entity, action, time):
 def schedule_animation(world, entity, repeat_count=0):
    schedule_action(world, entity,
       create_animation_action(world, entity, repeat_count),
-      entities.get_animation_rate(entity))
+      entity.get_animation_rate())
 
 
 def clear_pending_actions(world, entity):
