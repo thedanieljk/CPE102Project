@@ -32,6 +32,8 @@ class MinerNotFull:
       return self.imgs
    def get_rate(self):
       return self.rate
+   def set_resource_count(self, n):
+      self.resource_count = n
 class MinerFull:
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
@@ -52,6 +54,8 @@ class MinerFull:
       return self.imgs
    def get_rate(self):
       return self.rate
+   def set_resource_count(self, n):
+      self.resource_count = n
 class Vein:
    def __init__(self, name, rate, position, imgs, resource_distance=1):
       self.name = name
@@ -69,6 +73,8 @@ class Vein:
       return self.imgs
    def get_rate(self):
       return self.rate
+   def set_resource_count(self, n):
+      self.resource_count = n
 class Ore:
    def __init__(self, name, position, imgs, rate=5000):
       self.name = name
@@ -85,6 +91,8 @@ class Ore:
       return self.imgs
    def get_rate(self):
       return self.rate
+   def set_resource_count(self, n):
+      self.resource_count = n
 class Blacksmith:
    def __init__(self, name, position, imgs, resource_limit, rate,
       resource_distance=1):
@@ -105,6 +113,8 @@ class Blacksmith:
       return self.imgs
    def get_rate(self):
       return self.rate
+   def set_resource_count(self, n):
+      self.resource_count = n
 class Obstacle:
    def __init__(self, name, position, imgs):
       self.name = name
@@ -119,6 +129,8 @@ class Obstacle:
       return self.imgs
    def get_rate(self):
       return self.rate
+   def set_resource_count(self, n):
+      self.resource_count = n
 class OreBlob:
    def __init__(self, name, position, rate, imgs, animation_rate):
       self.name = name
@@ -136,6 +148,8 @@ class OreBlob:
       return self.imgs
    def get_rate(self):
       return self.rate
+   def set_resource_count(self, n):
+      self.resource_count = n
 class Quake:
    def __init__(self, name, position, imgs, animation_rate):
       self.name = name
@@ -152,13 +166,14 @@ class Quake:
       return self.imgs
    def get_rate(self):
       return self.rate
+   def set_resource_count(self, n):
+      self.resource_count = n
+
+
+
 def get_image(entity):
    return entity.imgs[entity.current_img]
 
-
-
-def set_resource_count(entity, n):
-   entity.resource_count = n
 
 def get_resource_count(entity):
    return entity.resource_count
