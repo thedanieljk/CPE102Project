@@ -4,6 +4,7 @@ import image_store
 import point
 import worldmodel
 
+
 PROPERTY_KEY = 0
 
 BGND_KEY = 'background'
@@ -18,7 +19,7 @@ MINER_NAME = 1
 MINER_LIMIT = 4
 MINER_COL = 2
 MINER_ROW = 3
-MINER_RATE = 5
+MINER_RATE = 5 
 MINER_ANIMATION_RATE = 6
 
 OBSTACLE_KEY = 'obstacle'
@@ -32,7 +33,7 @@ ORE_NUM_PROPERTIES = 5
 ORE_NAME = 1
 ORE_COL = 2
 ORE_ROW = 3
-ORE_RATE = 4
+ORE_RATE = 4 
 
 SMITH_KEY = 'blacksmith'
 SMITH_NUM_PROPERTIES = 7
