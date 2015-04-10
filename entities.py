@@ -5,7 +5,12 @@ class Background:
       self.name = name
       self.imgs = imgs
       self.current_img = 0
-
+   def set_position(self, point):
+      self.position = point
+   def get_position(self):
+      return self.position
+   def get_images(self):
+      return self.imgs
 class MinerNotFull:
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
@@ -22,7 +27,8 @@ class MinerNotFull:
       self.position = point
    def get_position(self):
       return self.position
-
+   def get_images(self):
+      return self.imgs
 class MinerFull:
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
@@ -39,7 +45,8 @@ class MinerFull:
       self.position = point
    def get_position(self):
       return self.position
-
+   def get_images(self):
+      return self.imgs
 class Vein:
    def __init__(self, name, rate, position, imgs, resource_distance=1):
       self.name = name
@@ -53,7 +60,8 @@ class Vein:
       self.position = point
    def get_position(self):
       return self.position
-
+   def get_images(self):
+      return self.imgs
 class Ore:
    def __init__(self, name, position, imgs, rate=5000):
       self.name = name
@@ -66,7 +74,8 @@ class Ore:
       self.position = point
    def get_position(self):
       return self.position
-
+   def get_images(self):
+      return self.imgs
 class Blacksmith:
    def __init__(self, name, position, imgs, resource_limit, rate,
       resource_distance=1):
@@ -83,7 +92,8 @@ class Blacksmith:
       self.position = point
    def get_position(self):
       return self.position
-
+   def get_images(self):
+      return self.imgs
 class Obstacle:
    def __init__(self, name, position, imgs):
       self.name = name
@@ -94,7 +104,8 @@ class Obstacle:
       self.position = point
    def get_position(self):
       return self.position
-
+   def get_images(self):
+      return self.imgs
 class OreBlob:
    def __init__(self, name, position, rate, imgs, animation_rate):
       self.name = name
@@ -108,7 +119,8 @@ class OreBlob:
       self.position = point
    def get_position(self):
       return self.position
-
+   def get_images(self):
+      return self.imgs
 class Quake:
    def __init__(self, name, position, imgs, animation_rate):
       self.name = name
@@ -121,10 +133,8 @@ class Quake:
       self.position = point
    def get_position(self):
       return self.position
-
-
-def get_images(entity):
-   return entity.imgs
+   def get_images(self):
+      return self.imgs
 
 def get_image(entity):
    return entity.imgs[entity.current_img]
