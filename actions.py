@@ -78,7 +78,7 @@ def miner_to_ore(world, entity, ore):
    ore_pt = ore.get_position()
    if adjacent(entity_pt, ore_pt):
       entity.set_resource_count(
-         1 + entities.get_resource_count(entity))
+         1 + entity.get_resource_count())
       remove_entity(world, ore)
       return ([ore_pt], True)
    else:
@@ -93,8 +93,8 @@ def miner_to_smith(world, entity, smith):
    smith_pt = smith.get_position()
    if adjacent(entity_pt, smith_pt):
       smith.set_resource_count(
-         entities.get_resource_count(smith) +
-         entities.get_resource_count(entity))
+         smith.get_resource_count() +
+         entity.get_resource_count())
       entity.set_resource_count(0)
       return ([], True)
    else:
