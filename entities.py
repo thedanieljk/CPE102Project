@@ -11,6 +11,7 @@ class Background:
       return self.position
    def get_images(self):
       return self.imgs
+
 class MinerNotFull:
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
@@ -29,6 +30,8 @@ class MinerNotFull:
       return self.position
    def get_images(self):
       return self.imgs
+   def get_rate(self):
+      return self.rate
 class MinerFull:
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
@@ -47,6 +50,8 @@ class MinerFull:
       return self.position
    def get_images(self):
       return self.imgs
+   def get_rate(self):
+      return self.rate
 class Vein:
    def __init__(self, name, rate, position, imgs, resource_distance=1):
       self.name = name
@@ -62,6 +67,8 @@ class Vein:
       return self.position
    def get_images(self):
       return self.imgs
+   def get_rate(self):
+      return self.rate
 class Ore:
    def __init__(self, name, position, imgs, rate=5000):
       self.name = name
@@ -76,6 +83,8 @@ class Ore:
       return self.position
    def get_images(self):
       return self.imgs
+   def get_rate(self):
+      return self.rate
 class Blacksmith:
    def __init__(self, name, position, imgs, resource_limit, rate,
       resource_distance=1):
@@ -94,6 +103,8 @@ class Blacksmith:
       return self.position
    def get_images(self):
       return self.imgs
+   def get_rate(self):
+      return self.rate
 class Obstacle:
    def __init__(self, name, position, imgs):
       self.name = name
@@ -106,6 +117,8 @@ class Obstacle:
       return self.position
    def get_images(self):
       return self.imgs
+   def get_rate(self):
+      return self.rate
 class OreBlob:
    def __init__(self, name, position, rate, imgs, animation_rate):
       self.name = name
@@ -121,6 +134,8 @@ class OreBlob:
       return self.position
    def get_images(self):
       return self.imgs
+   def get_rate(self):
+      return self.rate
 class Quake:
    def __init__(self, name, position, imgs, animation_rate):
       self.name = name
@@ -135,13 +150,11 @@ class Quake:
       return self.position
    def get_images(self):
       return self.imgs
-
+   def get_rate(self):
+      return self.rate
 def get_image(entity):
    return entity.imgs[entity.current_img]
 
-
-def get_rate(entity):
-   return entity.rate
 
 
 def set_resource_count(entity, n):
