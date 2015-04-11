@@ -30,6 +30,33 @@ class WorldModel:
    def is_occupied(self, pt):
       return (self.within_bounds(pt) and
           occ_grid.get_cell(self.occupancy, pt) != None)
+   def schedule_action(self,action, time):
+     self.action_queue.insert(action, time)
+   def unschedule_action(self,action):
+     self.action_queue.remove(action)
+   def update_on_time(world, ticks):
+     tiles = []
+ 
+     next = world.action_queue.head()
+     while next and next.ord < ticks:
+         world.action_queue.pop()
+         tiles.extend(next.item(ticks))  # invoke action function
+         next = world.action_queue.head()
+     return tiles
+   def get_background_image(self,pt):
+     if self.within_bounds(pt):
+         return entities.get_image(occ_grid.get_cell(self.background, pt))
+   def get_background(self, pt):
+     if within_bounds(self, pt):
+         return occ_grid.get_cell(self.background, pt)
+   def set_background(self, pt, bgnd):
+     if self.within_bounds(pt):
+         occ_grid.set_cell(self.background, pt, bgnd)
+   def get_tile_occupant(self, pt):
+     if self.within_bounds(pt):
+         return occ_grid.get_cell(self.occupancy, pt) 
+   def get_entities(self):
+     return self.entities 
 
 
 def nearest_entity(entity_dists):
@@ -92,45 +119,6 @@ def remove_entity_at(world, pt):
       occ_grid.set_cell(world.occupancy, pt, None)
 
 
-def schedule_action(world, action, time):
-   world.action_queue.insert(action, time)
 
 
-def unschedule_action(world, action):
-   world.action_queue.remove(action)
 
-
-def update_on_time(world, ticks):
-   tiles = []
-
-   next = world.action_queue.head()
-   while next and next.ord < ticks:
-      world.action_queue.pop()
-      tiles.extend(next.item(ticks))  # invoke action function
-      next = world.action_queue.head()
-
-   return tiles
-
-
-def get_background_image(world, pt):
-   if world.within_bounds(pt):
-      return entities.get_image(occ_grid.get_cell(world.background, pt))
-
-
-def get_background(world, pt):
-   if within_bounds(world, pt):
-      return occ_grid.get_cell(world.background, pt)
-
-
-def set_background(world, pt, bgnd):
-   if world.within_bounds(pt):
-      occ_grid.set_cell(world.background, pt, bgnd)
-
-
-def get_tile_occupant(world, pt):
-   if world.within_bounds(pt):
-      return occ_grid.get_cell(world.occupancy, pt)
-
-
-def get_entities(world):
-   return world.entities

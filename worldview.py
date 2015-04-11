@@ -43,7 +43,7 @@ def draw_background(view):
    for y in range(0, view.viewport.height):
       for x in range(0, view.viewport.width):
          w_pt = viewport_to_world(view.viewport, point.Point(x, y))
-         img = worldmodel.get_background_image(view.world, w_pt)
+         img = worldmodel.WorldModel.get_background_image(view.world,w_pt)
          view.screen.blit(img, (x * view.tile_width, y * view.tile_height))
 
 
@@ -93,8 +93,8 @@ def update_tile(view, view_tile_pt, surface):
 
 def get_tile_image(view, view_tile_pt):
    pt = viewport_to_world(view.viewport, view_tile_pt)
-   bgnd = worldmodel.get_background_image(view.world, pt)
-   occupant = worldmodel.get_tile_occupant(view.world, pt)
+   bgnd = worldmodel.WorldModel.get_background_image(view.world, pt)
+   occupant = worldmodel.WorldModel.get_tile_occupant(view.world, pt)
    if occupant:
       img = pygame.Surface((view.tile_width, view.tile_height))
       img.blit(bgnd, (0, 0))

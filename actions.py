@@ -58,13 +58,13 @@ def blob_next_position(world, entity_pt, dest_pt):
    new_pt = point.Point(entity_pt.x + horiz, entity_pt.y)
 
    if horiz == 0 or (world.is_occupied(new_pt) and
-      not isinstance(worldmodel.get_tile_occupant(world, new_pt),
+      not isinstance(worldmodel.WorldModel.get_tile_occupant(world,new_pt),
       entities.Ore)):
       vert = sign(dest_pt.y - entity_pt.y)
       new_pt = point.Point(entity_pt.x, entity_pt.y + vert)
 
       if vert == 0 or (world.is_occupied(new_pt) and
-         not isinstance(worldmodel.get_tile_occupant(world, new_pt),
+         not isinstance(worldmodel.WorldModel.get_tile_occupant(world, new_pt),
          entities.Ore)):
          new_pt = point.Point(entity_pt.x, entity_pt.y)
 
@@ -152,7 +152,7 @@ def blob_to_vein(world, entity, vein):
       return ([vein_pt], True)
    else:
       new_pt = blob_next_position(world, entity_pt, vein_pt)
-      old_entity = worldmodel.get_tile_occupant(world, new_pt)
+      old_entity = worldmodel.WorldModel.get_tile_occupant(world, new_pt)
       if isinstance(old_entity, entities.Ore):
          remove_entity(world, old_entity)
       return (worldmodel.move_entity(world, entity, new_pt), False)
@@ -293,7 +293,7 @@ def create_ore_transform_action(world, entity, i_store):
 
 def remove_entity(world, entity):
    for action in entity.get_pending_actions():
-      worldmodel.unschedule_action(world, action)
+      worldmodel.WorldModel.unschedule_action(world,action)
    entity.clear_pending_actions()
    worldmodel.remove_entity(world, entity)
 
@@ -360,7 +360,7 @@ def schedule_vein(world, vein, ticks, i_store):
 
 def schedule_action(world, entity, action, time):
    entity.add_pending_action(action)
-   worldmodel.schedule_action(world, action, time)
+   world.schedule_action(action, time)
 
 
 def schedule_animation(world, entity, repeat_count=0):
