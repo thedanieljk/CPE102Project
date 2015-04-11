@@ -1,0 +1,211 @@
+class: Background
+methods:
+    get_images
+
+class: MinerNotFull:
+methods:
+    set_position
+    get_position
+    get_images
+    get_rate
+    set_resource_count
+    get_resource_count
+    get_resource_limit
+    get_resource_distance
+    get_name
+    get_animation_rate
+    remove_pending_action
+    add_pending_action
+    get_pending_actions
+    clear_pending_actions
+    entity_string
+
+class: MinerFull:
+   methods:
+      set_position
+      get_position
+      get_images
+      get_rate
+      set_resource_count
+      get_resource_count
+      get_resource_limit
+      get_resource_distance
+      get_name
+      get_animation_rate
+      remove_pending_action
+      add_pending_action
+      get_pending_actions
+      clear_pending_actions
+      entity_string
+
+class: Ore:
+   methods:
+      set_position
+      get_position
+      get_images
+      get_rate
+      set_resource_count
+      get_resource_count
+      get_resource_limit
+      get_resource_distance
+      get_name
+      get_animation_rate
+      remove_pending_action
+      add_pending_action
+      get_pending_actions
+      clear_pending_actions
+      entity_string
+
+class: Blacksmith:
+   methods:
+      set_position
+      get_position
+      get_images
+      get_rate
+      set_resource_count
+      get_resource_count
+      get_resource_limit
+      get_resource_distance
+      get_name
+      get_animation_rate
+      remove_pending_action
+      add_pending_action
+      get_pending_actions
+      clear_pending_actions
+      entity_string
+
+class: Obstacle:
+   methods:
+      set_position
+      get_position
+      get_images
+      get_rate
+      set_resource_count
+      get_resource_count
+      get_resource_limit
+      get_resource_distance
+      get_name
+      get_animation_rate
+      remove_pending_action
+      add_pending_action
+      get_pending_actions
+      clear_pending_actions
+      entity_string
+
+class: OreBlob:
+   methods:
+      set_position
+      get_position
+      get_images
+      get_rate
+      set_resource_count
+      get_resource_count
+      get_resource_limit
+      get_resource_distance
+      get_name
+      get_animation_rate
+      remove_pending_action
+      add_pending_action
+      get_pending_actions
+      clear_pending_actions
+      entity_string
+
+class: Quake:
+   methods:
+      set_position
+      get_position
+      get_images
+      get_rate
+      set_resource_count
+      get_resource_count
+      get_resource_limit
+      get_resource_distance
+      get_name
+      get_animation_rate
+      remove_pending_action
+      add_pending_action
+      get_pending_actions
+      clear_pending_actions
+      entity_string
+
+class: Grid:
+    methods:
+      just init, could have included set_cell and get_cell
+
+class: OrderedList:
+    methods:
+      insert
+      remove
+      head
+      pop
+
+class: ListItem:
+    methods:
+      just init/eq funcs
+
+class: Point:
+    methods:
+      just init
+
+Didn't Change:
+    get_image #no specific class
+    next_image #didn't feel that a specific class should have this method
+    sign #no specific class
+    blob_next_position #honestly just couldn't figure out the syntax, I know this should probably be in the blob class inside of entities
+    miner_to_ore #should be in MinerNotFull Class?
+    miner_to_smith #MinerFull class?
+    create_miner_not_full_action #should be in miner classes
+    create_miner_full_action #miner classes
+    blob_to_vein #should be in blob class
+    create_ore_blob_action #put in the blob class
+    find_open_around #no specific class?
+    create_vein_action #put in the vein class
+    try_transform_miner_full #put in the miner not full class
+    try_transform_miner_not_full #put in the miner full class
+    create_miner_action #miner classes
+    #create_animation_action #I don't think this needs to be in any specific class
+    create_entity_death_action #no specific class
+    create_ore_transform_action #put in the ore class
+    remove_entity #no one specific class
+    create_blob #blob class
+    schedule_blob #blob class
+    schedule_miner #miner classes?
+    create_ore #ore class
+    schedule_ore #ore class
+    create_quake #quake class
+    schedule_quake #quake class
+    create_Vein #vein class
+    schedule_vein #vein class
+    schedule_action #no one specific class
+    clear_pending_actions #no one specific class
+    mouse_to_tile #no specific class
+    save_World #possibly could have moved to worldmodel?
+    load_world #could have moved to worldmodel
+    on_keydown #didn't need to be in a specific class
+    handle_mouse_motion #maybe the worldview class
+    handle_keydown #worldview class?
+    is_background_title #don't feel like this needed to be put into a method because of how simple/easy the function already is
+    handle_mouse_button #maybe worldview class?
+    activity_loop #no specific class
+    create_default_background #simple function, doesn't need to run multiple times
+    main #no need for it to be in a class
+    create_default_image #no specific class
+    load_images #no specific class
+    process_image_line #no specific class
+    get_images_internal #no specific class
+    get_images #no specific class   
+    load_world #no specific class? simple func, loads it once?
+    set_cell #already such a simple function
+    get_cell #already such a simple function
+    save_world #didn't need to be a method
+    save_entities #didn't need to be a method
+    load_world #didn't need to be a method
+    add_background #
+    add_entity #no specific class
+    create_from_properties #no class
+    create_miner #maybe make a single create function withmethods
+    create_vein #^
+    create_ore #^
+    create_Blacksmith #^
+    create_obstacle #^
+    schedule_entity #no specific class
