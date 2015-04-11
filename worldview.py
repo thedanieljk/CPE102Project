@@ -2,7 +2,6 @@ import pygame
 import worldmodel
 import entities
 import point
-
 MOUSE_HOVER_ALPHA = 120
 MOUSE_HOVER_EMPTY_COLOR = (0, 255, 0)
 MOUSE_HOVER_OCC_COLOR = (255, 0, 0)
@@ -121,7 +120,7 @@ def create_mouse_surface(view, occupied):
 def update_mouse_cursor(view):
    return update_tile(view, view.mouse_pt,
       create_mouse_surface(view,
-         worldmodel.is_occupied(view.world,
+         worldmodel.WorldModel.is_occupied(view.world,
             viewport_to_world(view.viewport, view.mouse_pt))))
 
 
