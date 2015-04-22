@@ -1,8 +1,4 @@
-#I honestly just couldn't figure out
-#the syntax in time. I spent so much
-#time working on this but I couldn't
-#figure it out by myself without
-#spending a ton of time
+
 
 import point
 
@@ -13,15 +9,15 @@ class Background:
       self.current_img = 0
    def get_images(self):
       return self.imgs
-   
-class MinerNotFull:
+
+class Entity(object):
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
       self.name = name
       self.position = position
       self.rate = rate
       self.imgs = imgs
-      self.current_img = 0
+      self.current_img = 0    
       self.resource_limit = resource_limit
       self.resource_count = 0
       self.animation_rate = animation_rate
@@ -48,10 +44,10 @@ class MinerNotFull:
       return self.animation_rate
    def remove_pending_action(self, action):
       if hasattr(self, "pending_actions"):
-         self.pending_actions.remove(action)
+          self.pending_actions.remove(action)
    def add_pending_action(self, action):
       if hasattr(self, "pending_actions"):
-         self.pending_actions.append(action) 
+          self.pending_actions.append(action) 
    def get_pending_actions(self):
       if hasattr(self, "pending_actions"):
           return self.pending_actions
@@ -60,7 +56,16 @@ class MinerNotFull:
    def clear_pending_actions(self):
       if hasattr(self, "pending_actions"):
           self.pending_actions = []
-   def entity_string(self):                                                                   
+
+class MinerNotFull(Entity):
+   def __init__(self, name, resource_limit, position, rate, imgs,
+      animation_rate):
+      self.current_img = 0
+      self.resource_count = 0
+      self.pending_actions = []
+   
+      super(MinerNotFull,self).__init__(name,resource_limit,position,rate,imgs,animation_rate)
+   def entity_string(self):                                                         
       return ' '.join(['miner', self.name, str(self.position.x),
           str(self.position.y), str(self.resource_limit),
           str(self.rate), str(self.animation_rate)])
@@ -175,8 +180,6 @@ class Ore:
       return self.rate
    def set_resource_count(self, n):
       self.resource_count = n
-   def get_resource_count(self):
-      return self.resource_count
    def get_resource_limit(self):
       return self.resource_limit
    def get_resource_distance(self):
