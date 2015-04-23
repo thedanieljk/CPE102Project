@@ -1,12 +1,10 @@
-#I honestly just couldn't figure out
-#the syntax in time. I spent so much
-#time working on this but I couldn't
-#figure it out by myself without
-#spending a ton of time
-
 import point
 
-class Background: #has so little, not worth using inheritance
+#did not include entity_string in a parent class
+#felt that it would have to be redefined
+#too many times to be worth it
+
+class Background: #has such little input, not worth using inheritance
    def __init__(self, name, imgs):
       self.name = name
       self.imgs = imgs
@@ -60,7 +58,7 @@ class OtherEnt(object): #second parent class for irregular entities
    def get_images(self):
       return self.imgs
  
-class Miner(Entity):
+class Miner(Entity): #simplification of miner related classes using sub-inheritance. Entity -> Miner -> Miner related
    def __init__(self,name,position,rate,imgs,resource_limit,animation_rate):
       self.resource_limit = resource_limit
       self.resource_count = 0
@@ -75,7 +73,7 @@ class Miner(Entity):
    def get_animation_rate(self):
       return self.animation_rate
 
-class MinerNotFull(Miner):
+class MinerNotFull(Miner): #inherits from Miner! Entity -> Miner -> MinerNotFull
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
       super(MinerNotFull,self).__init__(name,position,rate,imgs,resource_limit,animation_rate)
@@ -84,7 +82,7 @@ class MinerNotFull(Miner):
           str(self.position.y), str(self.resource_limit),
           str(self.rate), str(self.animation_rate)])
 
-class MinerFull(Miner):
+class MinerFull(Miner): #inherits from Miner! Entity -> Miner -> MinerNotFull
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
       self.resource_count = resource_limit
