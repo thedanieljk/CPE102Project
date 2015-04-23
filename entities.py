@@ -97,23 +97,12 @@ class MinerFull(Entity):
    def clear_pending_actions(self):
       if hasattr(self, "pending_actions"):
           self.pending_actions = []
-class Vein:
+class Vein(Entity):
    def __init__(self, name, rate, position, imgs, resource_distance=1):
-      self.name = name
-      self.position = position
-      self.rate = rate
-      self.imgs = imgs
       self.current_img = 0
       self.resource_distance = resource_distance
       self.pending_actions = []
-   def set_position(self, point):
-      self.position = point
-   def get_position(self):
-      return self.position
-   def get_images(self):
-      return self.imgs
-   def get_rate(self):
-      return self.rate
+      super(Vein,self).__init__(name,position,rate,imgs)
    def set_resource_count(self, n):
       self.resource_count = n
    def get_resource_count(self):
@@ -122,8 +111,6 @@ class Vein:
       return self.resource_limit
    def get_resource_distance(self):
       return self.resource_distance
-   def get_name(self):
-      return self.name
    def get_animation_rate(self):
       return self.animation_rate
    def remove_pending_action(self, action):
@@ -140,7 +127,7 @@ class Vein:
    def clear_pending_actions(self):
       if hasattr(self, "pending_actions"):
           self.pending_actions = []
-   def entity_string(self):                                                                    
+   def entity_string(self):                                                     
        return ' '.join(['vein', self.name, str(self.position.x),
           str(self.position.y), str(self.rate),
           str(self.resource_distance)])
