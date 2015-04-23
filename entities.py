@@ -145,26 +145,15 @@ class Ore(Entity):
    def entity_string(self):                                                         
       return ' '.join(['ore', self.name, str(self.position.x),
           str(self.position.y), str(self.rate)])
-class Blacksmith:
+class Blacksmith(Entity):
    def __init__(self, name, position, imgs, resource_limit, rate,
       resource_distance=1):
-      self.name = name
-      self.position = position
-      self.imgs = imgs
       self.current_img = 0
       self.resource_limit = resource_limit
       self.resource_count = 0
-      self.rate = rate
       self.resource_distance = resource_distance
       self.pending_actions = []
-   def set_position(self, point):
-      self.position = point
-   def get_position(self):
-      return self.position
-   def get_images(self):
-      return self.imgs
-   def get_rate(self):
-      return self.rate
+      super(Blacksmith,self).__init__(name,position,rate,imgs)
    def set_resource_count(self, n):
       self.resource_count = n
    def get_resource_count(self):
@@ -173,10 +162,6 @@ class Blacksmith:
       return self.resource_limit
    def get_resource_distance(self):
       return self.resource_distance
-   def get_name(self):
-      return self.name
-   def get_animation_rate(self):
-      return self.animation_rate
    def remove_pending_action(self, action):
        if hasattr(self, "pending_actions"):
           self.pending_actions.remove(action)
