@@ -62,59 +62,19 @@ class MinerNotFull(Entity):
       animation_rate):
       self.current_img = 0
       self.resource_count = 0
-      self.pending_actions = []
-   
+      self.pending_actions = []   
       super(MinerNotFull,self).__init__(name,resource_limit,position,rate,imgs,animation_rate)
    def entity_string(self):                                                         
       return ' '.join(['miner', self.name, str(self.position.x),
           str(self.position.y), str(self.resource_limit),
           str(self.rate), str(self.animation_rate)])
-class MinerFull:
+
+class MinerFull(Entity):
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
-      self.name = name
-      self.position = position
-      self.rate = rate
-      self.imgs = imgs
       self.current_img = 0
-      self.resource_limit = resource_limit
-      self.resource_count = resource_limit
-      self.animation_rate = animation_rate
       self.pending_actions = []
-   def set_position(self, point):
-      self.position = point
-   def get_position(self):
-      return self.position
-   def get_images(self):
-      return self.imgs
-   def get_rate(self):
-      return self.rate
-   def set_resource_count(self, n):
-      self.resource_count = n
-   def get_resource_count(self):
-      return self.resource_count
-   def get_resource_limit(self):
-      return self.resource_limit
-   def get_resource_distance(self):
-      return self.resource_distance
-   def get_name(self):
-      return self.name
-   def get_animation_rate(self):
-      return self.animation_rate
-   def remove_pending_action(self, action):
-      if hasattr(self, "pending_actions"):
-          self.pending_actions.remove(action)
-   def add_pending_action(self, action):
-      if hasattr(self, "pending_actions"):
-          self.pending_actions.append(action) 
-   def get_pending_actions(self):
-      if hasattr(self, "pending_actions"):
-          return self.pending_actions
-      else:
-          return [] 
-   def clear_pending_actions(self):
-      if hasattr(self, "pending_actions"):
-          self.pending_actions = []
+      super(MinerFull,self).__init__(name,resource_limit,position,rate,imgs,animation_rate)
 class Vein:
    def __init__(self, name, rate, position, imgs, resource_distance=1):
       self.name = name
