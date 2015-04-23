@@ -1,5 +1,6 @@
 import point
-
+import actions
+import worldmodel
 #did not include entity_string in a parent class
 #felt that it would have to be redefined
 #too many times to be worth it
@@ -81,6 +82,19 @@ class MinerNotFull(Miner): #inherits from Miner! Entity -> Miner -> MinerNotFull
       return ' '.join(['miner', self.name, str(self.position.x),
           str(self.position.y), str(self.resource_limit),
           str(self.rate), str(self.animation_rate)])
+   def miner_to_ore(self,world, ore):
+      entity_pt = self.get_position()
+      if not ore:
+         return ([entity_pt], False)
+      ore_pt = ore.get_position()
+      if actions.adjacent(entity_pt, ore_pt):
+         self.set_resource_count(
+             1 + self.get_resource_count())
+         worldmodel.remove_entity(world, ore)
+         return ([ore_pt], True)
+      else:
+         new_pt = actions.next_position(world, entity_pt, ore_pt)
+         return (worldmodel.move_entity(world, self, new_pt), False)
 
 class MinerFull(Miner): #inherits from Miner! Entity -> Miner -> MinerNotFull
    def __init__(self, name, resource_limit, position, rate, imgs,

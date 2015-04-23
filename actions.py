@@ -70,22 +70,6 @@ def blob_next_position(world, entity_pt, dest_pt):
 
    return new_pt
 
-
-def miner_to_ore(world, entity, ore):
-   entity_pt = entity.get_position()
-   if not ore:
-      return ([entity_pt], False)
-   ore_pt = ore.get_position()
-   if adjacent(entity_pt, ore_pt):
-      entity.set_resource_count(
-         1 + entity.get_resource_count())
-      remove_entity(world, ore)
-      return ([ore_pt], True)
-   else:
-      new_pt = next_position(world, entity_pt, ore_pt)
-      return (worldmodel.move_entity(world, entity, new_pt), False)
-
-
 def miner_to_smith(world, entity, smith):
    entity_pt = entity.get_position()
    if not smith:
@@ -108,7 +92,7 @@ def create_miner_not_full_action(world, entity, i_store):
 
       entity_pt = entity.get_position()
       ore = worldmodel.find_nearest(world, entity_pt, entities.Ore)
-      (tiles, found) = miner_to_ore(world, entity, ore)
+      (tiles, found) = entity.miner_to_ore(world, ore)
 
       new_entity = entity
       if found:
