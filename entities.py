@@ -6,7 +6,7 @@
 
 import point
 
-class Background:
+class Background: #has so little, not worth using inheritance
    def __init__(self, name, imgs):
       self.name = name
       self.imgs = imgs
@@ -14,8 +14,7 @@ class Background:
    def get_images(self):
       return self.imgs
 
-
-class Entity(object):
+class Entity(object): #main parent class
    def __init__(self,name,position,rate,imgs):
       self.name = name
       self.position = position
@@ -48,13 +47,12 @@ class Entity(object):
       if hasattr(self, "pending_actions"):
          self.pending_actions = [] 
 
-class OtherEnt(object):
+class OtherEnt(object): #second parent class for irregular entities
    def __init__(self,name,position,imgs):
       self.name = name
       self.position = position
       self.imgs = imgs
       self.current_img = 0
-      self.pending_actions = []
    def set_position(self,point):
       self.position = point
    def get_position(self):
@@ -68,7 +66,6 @@ class MinerNotFull(Entity):
       self.resource_limit = resource_limit
       self.resource_count = 0
       self.animation_rate = animation_rate
-      self.pending_actions = []
       super(MinerNotFull,self).__init__(name,position,rate,imgs)
    def set_resource_count(self, n):
       self.resource_count = n
@@ -82,13 +79,13 @@ class MinerNotFull(Entity):
       return ' '.join(['miner', self.name, str(self.position.x),
           str(self.position.y), str(self.resource_limit),
           str(self.rate), str(self.animation_rate)])
+
 class MinerFull(Entity):
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
       self.resource_limit = resource_limit
       self.resource_count = resource_limit
       self.animation_rate = animation_rate
-      self.pending_actions = []
       super(MinerFull,self).__init__(name,position,rate,imgs)
    def set_resource_count(self, n):
       self.resource_count = n
@@ -98,10 +95,10 @@ class MinerFull(Entity):
       return self.resource_limit
    def get_animation_rate(self):
       return self.animation_rate
+
 class Vein(Entity):
    def __init__(self, name, rate, position, imgs, resource_distance=1):
       self.resource_distance = resource_distance
-      self.pending_actions = []
       super(Vein,self).__init__(name,position,rate,imgs)
    def get_resource_distance(self):
       return self.resource_distance
@@ -109,20 +106,20 @@ class Vein(Entity):
        return ' '.join(['vein', self.name, str(self.position.x),
           str(self.position.y), str(self.rate),
           str(self.resource_distance)])
+
 class Ore(Entity):
    def __init__(self, name, position, imgs, rate=5000):
-      self.pending_actions = []
       super(Ore,self).__init__(name,position,rate,imgs)
    def entity_string(self):                                                         
       return ' '.join(['ore', self.name, str(self.position.x),
           str(self.position.y), str(self.rate)])
+
 class Blacksmith(Entity):
    def __init__(self, name, position, imgs, resource_limit, rate,
       resource_distance=1):
       self.resource_limit = resource_limit
       self.resource_count = 0
       self.resource_distance = resource_distance
-      self.pending_actions = []
       super(Blacksmith,self).__init__(name,position,rate,imgs)
    def set_resource_count(self, n):
       self.resource_count = n
@@ -136,19 +133,21 @@ class Blacksmith(Entity):
        return ' '.join(['blacksmith', self.name, str(self.position.x),
           str(self.position.y), str(self.resource_limit),
           str(self.rate), str(self.resource_distance)])
+
 class Obstacle(OtherEnt):
    def __init__(self, name, position, imgs):
       super(Obstacle,self).__init__(name,position,imgs)
    def entity_string(self):                                           
       return ' '.join(['obstacle', self.name, str(self.position.x),
           str(self.position.y)])
+
 class OreBlob(Entity):
    def __init__(self, name, position, rate, imgs, animation_rate):
       self.animation_rate = animation_rate
-      self.pending_actions = []
       super(OreBlob,self).__init__(name,position,rate,imgs)
    def get_animation_rate(self):
       return self.animation_rate
+
 class Quake(OtherEnt):
    def __init__(self, name, position, imgs, animation_rate):
       self.animation_rate = animation_rate
@@ -170,7 +169,6 @@ class Quake(OtherEnt):
    def clear_pending_actions(self):
       if hasattr(self, "pending_actions"):
          self.pending_actions = []
-
 
 def get_image(entity):
    return entity.imgs[entity.current_img]
