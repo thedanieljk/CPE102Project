@@ -176,7 +176,7 @@ class Blacksmith(Entity):
    def clear_pending_actions(self):
        if hasattr(self, "pending_actions"):
           self.pending_actions = []
-   def entity_string(self):                                                                    
+   def entity_string(self):                                                       
        return ' '.join(['blacksmith', self.name, str(self.position.x),
           str(self.position.y), str(self.resource_limit),
           str(self.rate), str(self.resource_distance)])
@@ -220,26 +220,15 @@ class Obstacle:
    def clear_pending_actions(self):
       if hasattr(self, "pending_actions"):
           self.pending_actions = []
-   def entity_string(self):                                                                   
+   def entity_string(self):                                           
       return ' '.join(['obstacle', self.name, str(self.position.x),
           str(self.position.y)])
-class OreBlob:
+class OreBlob(Entity):
    def __init__(self, name, position, rate, imgs, animation_rate):
-      self.name = name
-      self.position = position
-      self.rate = rate
-      self.imgs = imgs
       self.current_img = 0
       self.animation_rate = animation_rate
       self.pending_actions = []
-   def set_position(self, point):
-      self.position = point
-   def get_position(self):
-      return self.position
-   def get_images(self):
-      return self.imgs
-   def get_rate(self):
-      return self.rate
+      super(OreBlob,self).__init__(name,position,rate,imgs)
    def set_resource_count(self, n):
       self.resource_count = n
    def get_resource_count(self):
@@ -248,8 +237,6 @@ class OreBlob:
       return self.resource_limit
    def get_resource_distance(self):
       return self.resource_distance
-   def get_name(self):
-      return self.name
    def get_animation_rate(self):
       return self.animation_rate
    def remove_pending_action(self, action):
