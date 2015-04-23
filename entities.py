@@ -115,6 +115,7 @@ class MinerFull(Miner): #inherits from Miner! Entity -> Miner -> MinerNotFull
       else:
          new_pt = actions.next_position(world, entity_pt, smith_pt)           
          return (worldmodel.move_entity(world, self, new_pt), False)
+
 class Vein(Entity):
    def __init__(self, name, rate, position, imgs, resource_distance=1):
       self.resource_distance = resource_distance
