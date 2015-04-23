@@ -139,20 +139,6 @@ class Blacksmith(Entity):
 class Obstacle(OtherEnt):
    def __init__(self, name, position, imgs):
       super(Obstacle,self).__init__(name,position,imgs)
-   def remove_pending_action(self, action):
-      if hasattr(self, "pending_actions"):
-          self.pending_actions.remove(action)
-   def add_pending_action(self, action):
-      if hasattr(self, "pending_actions"):
-          self.pending_actions.append(action) 
-   def get_pending_actions(self):
-      if hasattr(self, "pending_actions"):
-          return self.pending_actions
-      else:
-          return [] 
-   def clear_pending_actions(self):
-      if hasattr(self, "pending_actions"):
-          self.pending_actions = []
    def entity_string(self):                                           
       return ' '.join(['obstacle', self.name, str(self.position.x),
           str(self.position.y)])
@@ -163,30 +149,11 @@ class OreBlob(Entity):
       super(OreBlob,self).__init__(name,position,rate,imgs)
    def get_animation_rate(self):
       return self.animation_rate
-class Quake:
+class Quake(OtherEnt):
    def __init__(self, name, position, imgs, animation_rate):
-      self.name = name
-      self.position = position
-      self.imgs = imgs
-      self.current_img = 0
       self.animation_rate = animation_rate
       self.pending_actions = []
-   def set_position(self, point):
-      self.position = point
-   def get_position(self):
-      return self.position
-   def get_images(self):
-      return self.imgs
-   def get_rate(self):
-      return self.rate
-   def set_resource_count(self, n):
-      self.resource_count = n
-   def get_resource_limit(self):
-      return self.resource_limit
-   def get_resource_distance(self):
-      return self.resource_distance
-   def get_name(self):
-      return self.name
+      super(Quake,self).__init__(name,position,imgs)
    def get_animation_rate(self):
       return self.animation_rate
    def remove_pending_action(self, action):
