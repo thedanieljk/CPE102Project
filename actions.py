@@ -67,24 +67,7 @@ def blob_next_position(world, entity_pt, dest_pt):
          not isinstance(worldmodel.WorldModel.get_tile_occupant(world, new_pt),
          entities.Ore)):
          new_pt = point.Point(entity_pt.x, entity_pt.y)
-
    return new_pt
-
-def miner_to_smith(world, entity, smith):
-   entity_pt = entity.get_position()
-   if not smith:
-      return ([entity_pt], False)
-   smith_pt = smith.get_position()
-   if adjacent(entity_pt, smith_pt):
-      smith.set_resource_count(
-         smith.get_resource_count() +
-         entity.get_resource_count())
-      entity.set_resource_count(0)
-      return ([], True)
-   else:
-      new_pt = next_position(world, entity_pt, smith_pt)
-      return (worldmodel.move_entity(world, entity, new_pt), False)
-
 
 def create_miner_not_full_action(world, entity, i_store):
    def action(current_ticks):
@@ -112,7 +95,7 @@ def create_miner_full_action(world, entity, i_store):
 
       entity_pt = entity.get_position()
       smith = worldmodel.find_nearest(world, entity_pt, entities.Blacksmith)
-      (tiles, found) = miner_to_smith(world, entity, smith)
+      (tiles, found) = entity.miner_to_smith(world, smith)
 
       new_entity = entity
       if found:

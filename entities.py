@@ -101,7 +101,20 @@ class MinerFull(Miner): #inherits from Miner! Entity -> Miner -> MinerNotFull
       animation_rate):
       self.resource_count = resource_limit
       super(MinerFull,self).__init__(name,position,rate,imgs,resource_limit,animation_rate)
-
+   def miner_to_smith(self,world, smith):
+      entity_pt = self.get_position()
+      if not smith:
+         return ([entity_pt], False)
+      smith_pt = smith.get_position()
+      if actions.adjacent(entity_pt, smith_pt):
+         smith.set_resource_count(
+            smith.get_resource_count() +
+            self.get_resource_count())
+         self.set_resource_count(0)
+         return ([], True)
+      else:
+         new_pt = actions.next_position(world, entity_pt, smith_pt)           
+         return (worldmodel.move_entity(world, self, new_pt), False)
 class Vein(Entity):
    def __init__(self, name, rate, position, imgs, resource_distance=1):
       self.resource_distance = resource_distance
