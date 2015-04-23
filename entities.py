@@ -59,14 +59,13 @@ class OtherEnt(object): #second parent class for irregular entities
       return self.position
    def get_images(self):
       return self.imgs
-  
-class MinerNotFull(Entity):
-   def __init__(self, name, resource_limit, position, rate, imgs,
-      animation_rate):
+ 
+class Miner(Entity):
+   def __init__(self,name,position,rate,imgs,resource_limit,animation_rate):
       self.resource_limit = resource_limit
       self.resource_count = 0
       self.animation_rate = animation_rate
-      super(MinerNotFull,self).__init__(name,position,rate,imgs)
+      super(Miner,self).__init__(name,position,rate,imgs)
    def set_resource_count(self, n):
       self.resource_count = n
    def get_resource_count(self):
@@ -75,26 +74,21 @@ class MinerNotFull(Entity):
       return self.resource_limit
    def get_animation_rate(self):
       return self.animation_rate
+
+class MinerNotFull(Miner):
+   def __init__(self, name, resource_limit, position, rate, imgs,
+      animation_rate):
+      super(MinerNotFull,self).__init__(name,position,rate,imgs,resource_limit,animation_rate)
    def entity_string(self):                                                       
       return ' '.join(['miner', self.name, str(self.position.x),
           str(self.position.y), str(self.resource_limit),
           str(self.rate), str(self.animation_rate)])
 
-class MinerFull(Entity):
+class MinerFull(Miner):
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
-      self.resource_limit = resource_limit
       self.resource_count = resource_limit
-      self.animation_rate = animation_rate
-      super(MinerFull,self).__init__(name,position,rate,imgs)
-   def set_resource_count(self, n):
-      self.resource_count = n
-   def get_resource_count(self):
-      return self.resource_count
-   def get_resource_limit(self):
-      return self.resource_limit
-   def get_animation_rate(self):
-      return self.animation_rate
+      super(MinerFull,self).__init__(name,position,rate,imgs,resource_limit,animation_rate)
 
 class Vein(Entity):
    def __init__(self, name, rate, position, imgs, resource_distance=1):
