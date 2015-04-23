@@ -34,7 +34,6 @@ class Entity(object):
 class MinerNotFull(Entity):
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
-      self.current_img = 0
       self.resource_limit = resource_limit
       self.resource_count = 0
       self.animation_rate = animation_rate
@@ -69,7 +68,6 @@ class MinerNotFull(Entity):
 class MinerFull(Entity):
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
-      self.current_img = 0
       self.resource_limit = resource_limit
       self.resource_count = resource_limit
       self.animation_rate = animation_rate
@@ -99,7 +97,6 @@ class MinerFull(Entity):
           self.pending_actions = []
 class Vein(Entity):
    def __init__(self, name, rate, position, imgs, resource_distance=1):
-      self.current_img = 0
       self.resource_distance = resource_distance
       self.pending_actions = []
       super(Vein,self).__init__(name,position,rate,imgs)
@@ -125,7 +122,6 @@ class Vein(Entity):
           str(self.resource_distance)])
 class Ore(Entity):
    def __init__(self, name, position, imgs, rate=5000):
-      self.current_img = 0
       self.pending_actions = []
       super(Ore,self).__init__(name,position,rate,imgs)
    def remove_pending_action(self, action):
@@ -148,7 +144,6 @@ class Ore(Entity):
 class Blacksmith(Entity):
    def __init__(self, name, position, imgs, resource_limit, rate,
       resource_distance=1):
-      self.current_img = 0
       self.resource_limit = resource_limit
       self.resource_count = 0
       self.resource_distance = resource_distance
@@ -225,18 +220,9 @@ class Obstacle:
           str(self.position.y)])
 class OreBlob(Entity):
    def __init__(self, name, position, rate, imgs, animation_rate):
-      self.current_img = 0
       self.animation_rate = animation_rate
       self.pending_actions = []
       super(OreBlob,self).__init__(name,position,rate,imgs)
-   def set_resource_count(self, n):
-      self.resource_count = n
-   def get_resource_count(self):
-      return self.resource_count
-   def get_resource_limit(self):
-      return self.resource_limit
-   def get_resource_distance(self):
-      return self.resource_distance
    def get_animation_rate(self):
       return self.animation_rate
    def remove_pending_action(self, action):
