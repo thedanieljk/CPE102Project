@@ -128,16 +128,6 @@ class Ore(Entity):
       self.current_img = 0
       self.pending_actions = []
       super(Ore,self).__init__(name,position,rate,imgs)
-   def set_resource_count(self, n):
-      self.resource_count = n
-   def get_resource_count(self):
-      return self.resource_count
-   def get_resource_limit(self):
-      return self.resource_limit
-   def get_resource_distance(self):
-      return self.resource_distance
-   def get_animation_rate(self):
-      return self.animation_rate
    def remove_pending_action(self, action):
       if hasattr(self, "pending_actions"):
           self.pending_actions.remove(action)
