@@ -103,16 +103,8 @@ class Vein(Entity):
       self.resource_distance = resource_distance
       self.pending_actions = []
       super(Vein,self).__init__(name,position,rate,imgs)
-   def set_resource_count(self, n):
-      self.resource_count = n
-   def get_resource_count(self):
-      return self.resource_count
-   def get_resource_limit(self):
-      return self.resource_limit
    def get_resource_distance(self):
       return self.resource_distance
-   def get_animation_rate(self):
-      return self.animation_rate
    def remove_pending_action(self, action):
        if hasattr(self, "pending_actions"):
           self.pending_actions.remove(action)
@@ -131,22 +123,11 @@ class Vein(Entity):
        return ' '.join(['vein', self.name, str(self.position.x),
           str(self.position.y), str(self.rate),
           str(self.resource_distance)])
-class Ore:
+class Ore(Entity):
    def __init__(self, name, position, imgs, rate=5000):
-      self.name = name
-      self.position = position
-      self.imgs = imgs
       self.current_img = 0
-      self.rate = rate
       self.pending_actions = []
-   def set_position(self, point):
-      self.position = point
-   def get_position(self):
-      return self.position
-   def get_images(self):
-      return self.imgs
-   def get_rate(self):
-      return self.rate
+      super(Ore,self).__init__(name,position,rate,imgs)
    def set_resource_count(self, n):
       self.resource_count = n
    def get_resource_count(self):
@@ -155,8 +136,6 @@ class Ore:
       return self.resource_limit
    def get_resource_distance(self):
       return self.resource_distance
-   def get_name(self):
-      return self.name
    def get_animation_rate(self):
       return self.animation_rate
    def remove_pending_action(self, action):
@@ -173,7 +152,7 @@ class Ore:
    def clear_pending_actions(self):
       if hasattr(self, "pending_actions"):
           self.pending_actions = []
-   def entity_string(self):                                                                   
+   def entity_string(self):                                                         
       return ' '.join(['ore', self.name, str(self.position.x),
           str(self.position.y), str(self.rate)])
 class Blacksmith:
