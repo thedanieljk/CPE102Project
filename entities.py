@@ -5,13 +5,49 @@ import worldmodel
 #felt that it would have to be redefined
 #too many times to be worth it
 
-class Background: #has such little input, not worth using inheritance
-   def __init__(self, name, imgs):
+class WorldObject(object):
+   def __init__(self,name,imgs):
       self.name = name
       self.imgs = imgs
       self.current_img = 0
    def get_images(self):
       return self.imgs
+   def get_name(self):
+      return self.name
+
+class WorldEntity(WorldObject):
+   def __init__(self,name,imgs,position):
+      self.position = position
+      super(WorldEntity,self).__init__(name,imgs)
+   def set_position(self,point):
+      self.position = point
+   def get_position(self):
+      return self.position
+
+class Actor(WorldEntity):
+   def __init__(self,name,imgs,position,rate):
+      super(Actor,self).__init__(name,imgs,position)
+      self.rate = rate
+   def get_rate(self):
+      return self.rate
+   def remove_pending_action(self, action):
+      if hasattr(self, "pending_actions"):
+         self.pending_actions.remove(action)
+   def add_pending_action(self, action):
+      if hasattr(self, "pending_actions"):
+         self.pending_actions.append(action) 
+   def get_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+         return self.pending_actions
+      else:
+         return [] 
+   def clear_pending_actions(self):
+      if hasattr(self, "pending_actions"):
+         self.pending_actions = [] 
+
+class Background(WorldObject): #has such little input, not worth using inheritance
+   def __init__(self, name, imgs):
+      super(Background,self).__init__(name,imgs)
 
 class Entity(object): #main parent class
    def __init__(self,name,position,rate,imgs):
@@ -116,10 +152,10 @@ class MinerFull(Miner): #inherits from Miner! Entity -> Miner -> MinerNotFull
          new_pt = actions.next_position(world, entity_pt, smith_pt)           
          return (worldmodel.move_entity(world, self, new_pt), False)
 
-class Vein(Entity):
+class Vein(Actor):
    def __init__(self, name, rate, position, imgs, resource_distance=1):
       self.resource_distance = resource_distance
-      super(Vein,self).__init__(name,position,rate,imgs)
+      super(Vein,self).__init__(name,imgs,position,rate)
    def get_resource_distance(self):
       return self.resource_distance
    def entity_string(self):                                                     
@@ -127,20 +163,23 @@ class Vein(Entity):
           str(self.position.y), str(self.rate),
           str(self.resource_distance)])
 
-class Ore(Entity):
+class Ore(Actor):
    def __init__(self, name, position, imgs, rate=5000):
-      super(Ore,self).__init__(name,position,rate,imgs)
+      super(Ore,self).__init__(name,imgs,position,rate)
    def entity_string(self):                                                         
       return ' '.join(['ore', self.name, str(self.position.x),
           str(self.position.y), str(self.rate)])
 
-class Blacksmith(Entity):
+class Blacksmith(WorldEntity):
    def __init__(self, name, position, imgs, resource_limit, rate,
       resource_distance=1):
+      super(Blacksmith,self).__init__(name,imgs,position)
+      self.rate = rate
       self.resource_limit = resource_limit
       self.resource_count = 0
       self.resource_distance = resource_distance
-      super(Blacksmith,self).__init__(name,position,rate,imgs)
+   def get_rate(self):
+      return self.rate 
    def set_resource_count(self, n):
       self.resource_count = n
    def get_resource_count(self):
@@ -154,9 +193,9 @@ class Blacksmith(Entity):
           str(self.position.y), str(self.resource_limit),
           str(self.rate), str(self.resource_distance)])
 
-class Obstacle(OtherEnt):
+class Obstacle(WorldEntity):
    def __init__(self, name, position, imgs):
-      super(Obstacle,self).__init__(name,position,imgs)
+      super(Obstacle,self).__init__(name,imgs,position)
    def entity_string(self):                                           
       return ' '.join(['obstacle', self.name, str(self.position.x),
           str(self.position.y)])
