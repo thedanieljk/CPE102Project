@@ -1,9 +1,6 @@
 import point
 import actions
 import worldmodel
-#did not include entity_string in a parent class
-#felt that it would have to be redefined
-#too many times to be worth it
 
 class WorldObject(object):
    def __init__(self,name,imgs):
@@ -74,7 +71,7 @@ class Background(WorldObject):
       super(Background,self).__init__(name,imgs)
 
 
-class MinerNotFull(Miner): #inherits from Miner! Entity -> Miner -> MinerNotFull
+class MinerNotFull(Miner):
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
       super(MinerNotFull,self).__init__(name,imgs,position,animation_rate,rate,resource_limit)
@@ -96,7 +93,7 @@ class MinerNotFull(Miner): #inherits from Miner! Entity -> Miner -> MinerNotFull
          new_pt = actions.next_position(world, entity_pt, ore_pt)
          return (worldmodel.move_entity(world, self, new_pt), False)
 
-class MinerFull(Miner): #inherits from Miner! Entity -> Miner -> MinerNotFull
+class MinerFull(Miner):
    def __init__(self, name, resource_limit, position, rate, imgs,
       animation_rate):
       self.resource_count = resource_limit
